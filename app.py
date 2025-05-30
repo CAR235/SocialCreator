@@ -335,7 +335,6 @@ def health_check():
         'tokenizer_loaded': tokenizer is not None
     })
 
-CORS(app, origins=["https://tuo-progetto.vercel.app"])
 
 # Rimuovi la riga CORS duplicata alla fine
 # E sostituisci con:
