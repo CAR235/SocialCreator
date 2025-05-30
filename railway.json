@@ -15,7 +15,8 @@
         "FLASK_ENV": "production",
         "PYTHONUNBUFFERED": "1",
         "NODE_VERSION": "18",
-        "PYTHON_VERSION": "3.9"
+        "PYTHON_VERSION": "3.9",
+        "NIXPACKS_PYTHON_VERSION": "3.9"
       }
     }
   }
