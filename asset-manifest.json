@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/SocialCreator/static/css/main.452230ef.css",
-    "main.js": "/SocialCreator/static/js/main.a24c6c37.js",
+    "main.js": "/SocialCreator/static/js/main.fef4d6ef.js",
     "static/js/453.7067a680.chunk.js": "/SocialCreator/static/js/453.7067a680.chunk.js",
     "index.html": "/SocialCreator/index.html",
     "main.452230ef.css.map": "/SocialCreator/static/css/main.452230ef.css.map",
-    "main.a24c6c37.js.map": "/SocialCreator/static/js/main.a24c6c37.js.map",
+    "main.fef4d6ef.js.map": "/SocialCreator/static/js/main.fef4d6ef.js.map",
     "453.7067a680.chunk.js.map": "/SocialCreator/static/js/453.7067a680.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.452230ef.css",
-    "static/js/main.a24c6c37.js"
+    "static/js/main.fef4d6ef.js"
   ]
 }
