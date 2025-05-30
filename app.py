@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 from huggingface_hub import login
 import re
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='build', static_url_path='')
 CORS(app)
 
 # Carica le variabili d'ambiente dal file .env
@@ -336,8 +336,15 @@ def health_check():
     })
 
 
-# Rimuovi la riga CORS duplicata alla fine
-# E sostituisci con:
+# Route per servire il frontend React
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_frontend(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
 if __name__ == '__main__':
     print("🚀 Server avviato - Generazione AI attiva!")
     port = int(os.environ.get('PORT', 5000))
