@@ -335,6 +335,11 @@ def health_check():
         'tokenizer_loaded': tokenizer is not None
     })
 
+CORS(app, origins=["https://tuo-progetto.vercel.app"])
+
+# Rimuovi la riga CORS duplicata alla fine
+# E sostituisci con:
 if __name__ == '__main__':
     print("🚀 Server avviato - Generazione AI attiva!")
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
