@@ -10,7 +10,8 @@ from huggingface_hub import login
 import re
 
 app = Flask(__name__, static_folder='build', static_url_path='')
-CORS(app)
+# Sostituisci CORS(app) con:
+CORS(app, origins=["http://localhost:3000", "https://car235.github.io"])
 
 # Carica le variabili d'ambiente dal file .env
 load_dotenv()
@@ -346,6 +347,5 @@ def serve_frontend(path):
         return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
-    print("🚀 Server avviato - Generazione AI attiva!")
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
