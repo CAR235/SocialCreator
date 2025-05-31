@@ -18,21 +18,6 @@ function App() {
   const [showFeedback, setShowFeedback] = useState(false);
    const [feedbackRating, setFeedbackRating] = useState(0);
    const [feedbackComment, setFeedbackComment] = useState('');
-   
-   // Inline editing states
-   const [editingCaption, setEditingCaption] = useState(false);
-   const [editingIdeas, setEditingIdeas] = useState({});
-   const [editingHashtags, setEditingHashtags] = useState(false);
-   const [editedCaption, setEditedCaption] = useState('');
-   const [editedIdeas, setEditedIdeas] = useState({});
-   const [editedHashtags, setEditedHashtags] = useState('');
-   
-   // AI suggestions and batch mode
-   const [showSuggestions, setShowSuggestions] = useState(false);
-   const [batchMode, setBatchMode] = useState(false);
-   const [batchThemes, setBatchThemes] = useState(['']);
-   const [batchResults, setBatchResults] = useState([]);
-   const [batchLoading, setBatchLoading] = useState(false);
 
   // Enhanced effects and animations
   useEffect(() => {
@@ -300,99 +285,7 @@ function App() {
     return '';
     };
     
-    // Inline editing functions
-    const startEditingCaption = () => {
-      setEditingCaption(true);
-      setEditedCaption(results.caption);
-    };
-    
-    const saveEditedCaption = () => {
-      setResults(prev => ({ ...prev, caption: editedCaption }));
-      setEditingCaption(false);
-    };
-    
-    const startEditingIdea = (index) => {
-      setEditingIdeas(prev => ({ ...prev, [index]: true }));
-      setEditedIdeas(prev => ({ ...prev, [index]: results.post_ideas[index] }));
-    };
-    
-    const saveEditedIdea = (index) => {
-      const newIdeas = [...results.post_ideas];
-      newIdeas[index] = editedIdeas[index];
-      setResults(prev => ({ ...prev, post_ideas: newIdeas }));
-      setEditingIdeas(prev => ({ ...prev, [index]: false }));
-    };
-    
-    const startEditingHashtags = () => {
-      setEditingHashtags(true);
-      setEditedHashtags(results.hashtags.join(' '));
-    };
-    
-    const saveEditedHashtags = () => {
-      const hashtagArray = editedHashtags.split(' ').filter(tag => tag.trim());
-      setResults(prev => ({ ...prev, hashtags: hashtagArray }));
-      setEditingHashtags(false);
-    };
-    
-    // AI suggestions
-    const aiSuggestions = {
-      'IT': ['fitness', 'cucina', 'viaggio', 'moda', 'tecnologia', 'business', 'natura', 'arte', 'musica', 'sport'],
-      'EN': ['fitness', 'cooking', 'travel', 'fashion', 'technology', 'business', 'nature', 'art', 'music', 'sports']
-    };
-    
-    const selectSuggestion = (suggestion) => {
-      setTheme(suggestion);
-      setShowSuggestions(false);
-    };
-    
-    // Batch processing
-    const addBatchTheme = () => {
-      setBatchThemes(prev => [...prev, '']);
-    };
-    
-    const removeBatchTheme = (index) => {
-      setBatchThemes(prev => prev.filter((_, i) => i !== index));
-    };
-    
-    const updateBatchTheme = (index, value) => {
-      setBatchThemes(prev => prev.map((theme, i) => i === index ? value : theme));
-    };
-    
-    const processBatch = async () => {
-      const validThemes = batchThemes.filter(t => t.trim());
-      if (validThemes.length === 0) return;
-      
-      setBatchLoading(true);
-      setBatchResults([]);
-      
-      try {
-        const results = [];
-        for (const batchTheme of validThemes) {
-          const { translatedText, basePrompt } = translatePrompt(batchTheme, language);
-          
-          const response = await fetch('/api/generate', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-              theme: translatedText,
-              language: language.toLowerCase(),
-              basePrompt: basePrompt,
-              tone: tone
-            }),
-          });
-          
-          if (response.ok) {
-            const data = await response.json();
-            results.push({ theme: batchTheme, ...data });
-          }
-        }
-        setBatchResults(results);
-      } catch (error) {
-        console.error('Batch processing error:', error);
-      } finally {
-        setBatchLoading(false);
-      }
-    };
+
     
     const shareToSocial = (platform, content) => {
      const text = `${content.caption}\n\n${content.post_ideas.join('\n\n')}\n\n${content.hashtags.join(' ')}`;
