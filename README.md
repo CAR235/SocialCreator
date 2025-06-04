@@ -5,7 +5,7 @@ Un'applicazione web fullstack che aiuta micro-influencer e content creator a gen
 ## Caratteristiche
 
 - **Generazione di caption**: crea caption brevi e accattivanti per i tuoi post social
-- **Idee per contenuti**: ottieni 3 idee creative per post o video basate sul tuo tema
+- **Idee per contenuti**: ottieni 5 idee creative per post o video basate sul tuo tema
 - **Hashtag pertinenti**: genera fino a 10 hashtag rilevanti per aumentare la visibilità dei tuoi contenuti
 - **Interfaccia intuitiva**: design moderno e reattivo con Tailwind CSS
 
